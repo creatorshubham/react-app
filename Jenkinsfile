@@ -1,44 +1,8 @@
 pipeline {
-    agent any
-
-    environment {
-        IMAGE_NAME = 'speakeasy:latest' 
-    }
-
-    stages {
-        
-
-        
-
-        stage('Run Trivy Scan') {
-            steps {
-                script {
-                    // Run Trivy scan with severity filtering directly
-                    def trivyExitCode = sh(script: "trivy image ${IMAGE_NAME} --severity CRITICAL --quiet", returnStatus: true)
-
-                    // If the exit code is non-zero, it means vulnerabilities were found
-                    if (trivyExitCode != 0) {
-                        echo "Critical vulnerabilities detected during Trivy scan. Failing the build."
-                        currentBuild.result = 'FAILURE'
-                        return
-                    } else {
-                        echo "No critical vulnerabilities detected."
-                    }
-                }
-            }
-        }
-
-        
-        }
-    }
-}
-
-pipeline {
     agent any 
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('your-docker-credentials')
-        APP_NAME = "laly9999/lil-node-app"
+        IMAGE_NAME = 'speakeasy:latest' 
     }
 
     stages { 
