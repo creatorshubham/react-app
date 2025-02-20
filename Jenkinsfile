@@ -41,12 +41,5 @@ pipeline {
                 }
             }
         }
-       stage('Deploy Application') {
-            steps {
-                script {
-                    echo "Assume your application has been deployed."
-                }
-            }
-    }
     }
 }
